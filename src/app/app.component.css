@@ -1,0 +1,30 @@
+ button.mat-focus-indicator.p-2 {
+    margin: 8px 0px 0px 0px;
+}
+.bold{
+    font-family: Inter  ;
+    font-weight:800;
+    font-size: 40px
+}
+.medium{
+    font-family: Inter  ;
+    font-weight:500;
+    font-size: 18px
+}
+.semi-bold{
+    font-family: Inter  ;
+    font-weight:600;
+    font-size: 22px;
+    color: #6e6666;
+}
+.texto{
+    color: #6e6666;
+}
+.image{
+    background-image: url('../assets/image/bg.svg');
+    background-size:100%;
+}
+.bg-button{
+    background-color:#6862e6;
+    color: white
+}
