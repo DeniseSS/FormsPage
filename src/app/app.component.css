@@ -24,7 +24,10 @@
     background-image: url('../assets/image/bg.svg');
     background-size:100%;
 }
-.bg-button{
+.bg-blue{
     background-color:#6862e6;
     color: white
+}
+.pd{
+    padding: 1%;
 }

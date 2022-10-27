@@ -11,33 +11,48 @@
         </div>
         <img src="../assets/image/woman.svg" width="100%">
       </div>
-          <mat-card fxFlex.gt-sm="30%">
+      <div fxLayoutAlign.gt-sm="stretch" fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="p-2">
+          <mat-card>
             <h3 class="semi-bold p-2">Preencha o formulário</h3>
             <mat-card-content fxLayout.gt-sm="center center" class="medium">
-              <form fxLayoutAlign.gt-sm="stretch" fxLayout.gt-sm="column" fxFlex="100%"  [formGroup]="formCliente" (ngSubmit)="Submit()">  
+              <form id="form" fxLayoutAlign.gt-sm="stretch" fxLayout.gt-sm="column" fxFlex="100%">  
                 <p>
                   <mat-form-field fxFlex="100%">
                     <mat-label>Nome</mat-label>
-                    <input formcontrolname="phone"  type="text" matInput="" placeholder="Nome">
+                    <input type="text" matInput="" placeholder="Nome" #name="ngModel" name="nome" (ngModel)="cliente.name" id="name" required>
                     <mat-icon matSuffix>person</mat-icon>
+                  
                   </mat-form-field>
                 </p>
                 <p>
                   <mat-form-field fxFlex="100%">
                     <mat-label>Telefone</mat-label>
-                    <input formcontrolname="phone" type="tel" matInput="" placeholder="(11) 12345-6789" >
-                    <mat-icon matSuffix>phone</mat-icon>
+                    <input type="tel" matInput="" placeholder="(11) 12345-6789" #phone="ngModel"  name="phone" (ngModel)="cliente.phone" id="phone" required  [ngClass]="{'is-invalid': phone.invalid}">
+                    <mat-icon matSuffix>phone</mat-icon>    
                   </mat-form-field>
                 </p>
                 <p>
                      
-                <div class="example-button-row" fxLayout.gt-sm="column" fxLayout.lt-sm="column" fxLayout.md="column">
-                  <button type="submit" fxFlex="100%" mat-raised-button class="bg-button">Salvar</button>
-                  <button type="submit" fxFlex="100%" mat-raised-button color="" class="p-2" (click)="Clear()">Editar</button>
+                <div class="example-button-row" fxLayout.gt-sm="column" fxLayout.lt-sm="column" fxLayout.gt-md="column">
+                  <button type="submit" fxFlex="100%" mat-raised-button class="bg-blue" (click)="onSubmit()">Salvar</button>
+                  <button type="submit" fxFlex="100%" mat-raised-button color="" class="p-2" (click)="editar()">Editar</button>
                 </div>
               </form>
            </mat-card-content>
          </mat-card>
+         <mat-card  *ngIf="form" fxLayoutAlign.gt-sm="stretch" fxLayout.gt-sm="column" style="margin-top: 1.5%;" >
+          <mat-card-content class="medium" >
+            <p>
+              Name: {{cliente.name}}
+            </p>
+            <p>
+              Número: {{cliente.phone}}
+            </p>
+          </mat-card-content>
+          <mat-card-footer class="bg-blue pd">
+          </mat-card-footer>
+       </mat-card>
+       </div>
      </div>
 
 

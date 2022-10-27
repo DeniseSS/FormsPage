@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Cliente } from './Cliente';
-import { FormGroup, FormControl } from '@angular/forms';
-
-
+import { Component,  Input,  OnInit} from '@angular/core';
+import { observeOn } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,30 +7,40 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./app.component.css']
 
 })
-
 export class AppComponent implements OnInit{
   
-formCliente!:  FormGroup
-
-
-ngOnInit(): void {
-  this.ClienteForms(new Cliente());
+cliente: any ={
+  name: '',
+  phone: ''
 }
+form: any
+clienteObj: any;
 
-ClienteForms(cliente: Cliente){
-  this.formCliente = new FormGroup({
-    nameCliente: new FormControl(cliente.name),
-    phoneCliente:  new FormControl(cliente.phone)
-  })
-}
-Submit() {
-  
-
+onSubmit() {
+    var i = Object.keys(this.cliente).length;
+ 
+    this.form =  document.getElementById("form")
+    var phone: any =  document.getElementById("phone")
+    var name: any =  document.getElementById("name")
+    
+    localStorage.setItem('cliente', JSON.stringify(this.cliente));
+    let data: any = localStorage.getItem('cliente');
+    let clienteObj = JSON.parse(data);
+    this.cliente.phone= clienteObj.phone = phone.value
+    this.cliente.name=clienteObj.name = name.value 
+ 
+    this.form.reset();
  
 }
-Clear(){
-  this.formCliente.reset(new Cliente());
-}
-  
 
+editar(){
+ (<HTMLSelectElement>document.getElementById('phone')).value = this.cliente.phone;
+ (<HTMLSelectElement>document.getElementById('name')).value = this.cliente.name
+
+}
+
+ngOnInit(): void {  
+
+
+  }
 }
