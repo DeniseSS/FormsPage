@@ -31,3 +31,9 @@
 .pd{
     padding: 1%;
 }
+.th-white{
+    color: white;
+    font-family: Inter  ;
+    font-weight:500;
+    font-size: 18px
+}

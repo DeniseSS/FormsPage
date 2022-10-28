@@ -15,21 +15,23 @@
           <mat-card>
             <h3 class="semi-bold p-2">Preencha o formulário</h3>
             <mat-card-content fxLayout.gt-sm="center center" class="medium">
-              <form id="form" fxLayoutAlign.gt-sm="stretch" fxLayout.gt-sm="column" fxFlex="100%">  
+              <form id="form" fxLayoutAlign.gt-sm="stretch" fxLayout.gt-sm="column" fxFlex="100%" [formGroup]="forms">  
                 <p>
                   <mat-form-field fxFlex="100%">
                     <mat-label>Nome</mat-label>
-                    <input type="text" matInput="" placeholder="Nome" #name="ngModel" name="nome" (ngModel)="cliente.name" id="name" required>
+                    <input type="text" matInput="" placeholder="Nome"  name="nome" id="name" required  formControlName="name">
                     <mat-icon matSuffix>person</mat-icon>
-                  
+                    <mat-hint *ngIf="message">{{message}}</mat-hint>
                   </mat-form-field>
                 </p>
                 <p>
                   <mat-form-field fxFlex="100%">
                     <mat-label>Telefone</mat-label>
-                    <input type="tel" matInput="" placeholder="(11) 12345-6789" #phone="ngModel"  name="phone" (ngModel)="cliente.phone" id="phone" required  [ngClass]="{'is-invalid': phone.invalid}">
-                    <mat-icon matSuffix>phone</mat-icon>    
+                    <input type="tel" matInput="" placeholder="(11) 12345-6789"  name="phone"  id="phone" required formControlName="phone">
+                    <mat-icon matSuffix>phone</mat-icon>
+                    <mat-hint *ngIf="message">{{message}}</mat-hint>
                   </mat-form-field>
+                  
                 </p>
                 <p>
                      
@@ -40,19 +42,37 @@
               </form>
            </mat-card-content>
          </mat-card>
-         <mat-card  *ngIf="form" fxLayoutAlign.gt-sm="stretch" fxLayout.gt-sm="column" style="margin-top: 1.5%;" >
+         <mat-card  fxLayoutAlign.gt-sm="stretch" fxLayout.gt-sm="column" style="margin-top: 1.5%;" >
           <mat-card-content class="medium" >
-            <p>
-              Name: {{cliente.name}}
-            </p>
-            <p>
-              Número: {{cliente.phone}}
+            <p  *ngFor="let dados of data">
+              dados: {{dados}}
             </p>
           </mat-card-content>
           <mat-card-footer class="bg-blue pd">
           </mat-card-footer>
        </mat-card>
-       </div>
+       </div> 
      </div>
-
-
+    <div  fxLayoutAlign.gt-sm="space-around center">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 br" fxFlex="60%">
+          <ng-container matColumnDef="position">
+            <th class="th-white" mat-header-cell *matHeaderCellDef> Number </th>
+            <td mat-cell *matCellDef="let element"> {{phone} </td>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <th class="th-white" mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="weight">
+            <th class="th-white" class="th-white" mat-header-cell *matHeaderCellDef> Weight </th>     
+          </ng-container>
+          <ng-container matColumnDef="symbol">
+            <th class="th-white" mat-header-cell *matHeaderCellDef> Symbol </th>
+         
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns" class="bg-blue "></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    
+ 
